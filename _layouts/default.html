@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -8,7 +6,7 @@
   <title>{{ site.title }}</title>
 	<meta name="keywords" content="{{ site.keywords }}">
 	<meta name="description" content="{{ site.description }}">
-  <link rel="stylesheet" href="combo.css">
+  <link rel="stylesheet" href="/combo.css">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
@@ -18,10 +16,25 @@
 <body>
   <div id="main">
 
-<h1>UNDER CONSTRUCTION</h1>
-<h1>공사중입니다</h1>
+    <nav><ul>
+      {% for node in site.front reversed %}
+        {% capture id %}{{ node.id | remove:'/' | downcase }}{% endcapture %}
+        <li class="p-{{id}}"><a href="#{{id}}">{{node.title}}</a></li>
+      {% endfor %}
+    </ul></nav>
 
-  </div>
+<div class="container">
+{{ content }}
+</div>
+
+    <div id="footer" class="section text-white">
+      <div class="container">
+        {% capture foottext %} {% include footer.md %} {% endcapture %}
+        {{ foottext | markdownify }}
+      </div>
+    </div>
+
+</div>
 
 {% include analytics.html %}
 </body>
